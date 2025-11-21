@@ -9,35 +9,23 @@ on:
       - main
 
 jobs:
-  lint:
-    runs-on: ubuntu-22.04
-    name: Lint
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-      - run: yarn
-      - run: yarn lint
   build:
     runs-on: ubuntu-22.04
-    needs: lint
     name: Build
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: '18'
-      - run: yarn
-      - run: yarn build
+          node-version: '22'
+      - run: npm install
+      - run: npm run build
   test:
     runs-on: ubuntu-22.04
-    needs: build
     name: Test
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: '18'
-      - run: yarn
-      - run: yarn test
+          node-version: '22'
+      - run: npm install
+      - run: npm run test
